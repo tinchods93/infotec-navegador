@@ -1,0 +1,14 @@
+{
+  "iconos": {
+    "star-empty": "far fa-star",
+    "star-full": "fas fa-star",
+    "times": "fas fa-times",
+    "arrow-right": "fas fa-arrow-right",
+    "arrow-left": "fas fa-arrow-left",
+    "redo": "fas fa-redo-alt",
+    "ellipsis": "fas fa-ellipsis-v",
+    "minus": "fas fa-minus",
+    "maximize-windows": "fas fa-window-restore",
+    "minimize-windows": "far fa-square"
+  }
+}

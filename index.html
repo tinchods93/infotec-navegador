@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Browser</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./app/renderer/css/renderer.css" />
+  </head>
+  <body id="browser">
+    <nav id="navigation" class="navbar">
+      <div class="navbar__section">
+        <div class="navbar__tabs">
+          <div class="navbar__tab">
+            <div class="page__title">
+              <div class="favicon">
+                <img
+                  src="https://www.google.com/favicon.ico"
+                  alt="favicon"
+                  id="favicon"
+                />
+              </div>
+              <span
+                >Googleaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span
+              >
+            </div>
+            <div class="control_btn">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
+        </div>
+        <div class="navbar__windowcontrols">
+          <div class="control__icon" id="minimizarBtn">
+            <i class="fas fa-minus"></i>
+          </div>
+          <div class="control__icon" id="restaurarBtn">
+            <i class="fas fa-window-restore"></i>
+          </div>
+          <div class="control__icon control__icon--close" id="cerrarBtn">
+            <i class="fas fa-times"></i>
+          </div>
+        </div>
+      </div>
+      <div class="navbar__section">
+        <div class="page__controls">
+          <div id="back" class="control_btn">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+          </div>
+          <div id="forward" class="control_btn">
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </div>
+          <div id="refresh" class="control_btn">
+            <i class="fas fa-redo-alt" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="page__navigator">
+          <div class="page__url" id="omnibox">
+            <input type="text" id="url" />
+            <div class="favoritos" id="fave">
+              <div class="control_btn">
+                <i class="far fa-star" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="user__options__burger">
+          <div class="control_btn">
+            <i class="fas fa-ellipsis-v"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="views" class="views">
+      <webview
+        id="view"
+        class="page"
+        src="http://www.google.com/"
+        autosize="on"
+        nodeintegration
+      ></webview>
+    </div>
+    <script>
+      require('./app/renderer/components/barraHerramientas/barraHerramientas.js');
+    </script>
+  </body>
+</html>
