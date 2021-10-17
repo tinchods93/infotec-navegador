@@ -10,29 +10,15 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./app/renderer/css/renderer.css" />
+    <link rel="stylesheet" href="node_modules/electron-tabs/electron-tabs.css" >
   </head>
   <body id="browser">
     <nav id="navigation" class="navbar">
       <div class="navbar__section">
-        <div class="navbar__tabs">
-          <div class="navbar__tab">
-            <div class="page__title">
-              <div class="favicon">
-                <img
-                  src="https://www.google.com/favicon.ico"
-                  alt="favicon"
-                  id="favicon"
-                />
-              </div>
-              <span
-                >Googleaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span
-              >
-            </div>
-            <div class="control_btn">
-              <i class="fas fa-times"></i>
-            </div>
-          </div>
+        <div class="etabs-tabgroup">
+        <div class="navbar__tabs etabs-tabs"> 
         </div>
+        <div class="etabs-buttons"></div>
         <div class="navbar__windowcontrols">
           <div class="control__icon" id="minimizarBtn">
             <i class="fas fa-minus"></i>
@@ -44,7 +30,8 @@
             <i class="fas fa-times"></i>
           </div>
         </div>
-      </div>
+      </div> 
+    </div>
       <div class="navbar__section">
         <div class="page__controls">
           <div id="back" class="control_btn">
@@ -73,16 +60,8 @@
           </div>
         </div>
       </div>
-    </nav>
-    <div id="views" class="views">
-      <webview
-        id="view"
-        class="page"
-        src="http://www.google.com/"
-        autosize="on"
-        nodeintegration
-      ></webview>
-    </div>
+    </nav>   
+    <div class="etabs-views"></div>
     <script>
       require('./app/renderer/components/barraHerramientas/barraHerramientas.js');
     </script>

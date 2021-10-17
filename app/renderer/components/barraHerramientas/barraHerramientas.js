@@ -2,6 +2,7 @@ const jsonfile = require('jsonfile');
 const path = require('path');
 const uuid = require('uuid'); //para generar un ID unico para los favoritos
 const { ipcRenderer: ipc } = require('electron');
+const TabGroup = require("electron-tabs");
 const {
   actualizarURL,
   recargarPagina,
@@ -76,4 +77,22 @@ forward.addEventListener('click', () => {
   avanzarPagina(view);
 });
 
-// fave.addEventListener('click', agregarFavorito);
+let tabGroup = new TabGroup({
+  newTab: {
+      title: 'Nueva Pestaña',
+      visible: true,
+      src: "https://google.com",
+      webviewAttributes: {
+      nodeintegration: true
+      }
+  }
+});
+
+let tab1 = tabGroup.addTab({
+  title: "Google3.0",
+  src: "https://google.com",
+  visible: false
+});
+
+
+// fave.addEventListener('click', agregarFavorito);*/
