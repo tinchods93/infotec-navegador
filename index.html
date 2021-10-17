@@ -10,15 +10,18 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./app/renderer/css/renderer.css" />
-    <link rel="stylesheet" href="node_modules/electron-tabs/electron-tabs.css" >
+    <!-- <link
+      rel="stylesheet"
+      href="node_modules/electron-tabs/electron-tabs.css"
+    /> -->
   </head>
   <body id="browser">
     <nav id="navigation" class="navbar">
       <div class="navbar__section">
         <div class="etabs-tabgroup">
-        <div class="navbar__tabs etabs-tabs"> 
+          <div class="navbar__tabs etabs-tabs"></div>
+          <div class="etabs-buttons"></div>
         </div>
-        <div class="etabs-buttons"></div>
         <div class="navbar__windowcontrols">
           <div class="control__icon" id="minimizarBtn">
             <i class="fas fa-minus"></i>
@@ -30,8 +33,7 @@
             <i class="fas fa-times"></i>
           </div>
         </div>
-      </div> 
-    </div>
+      </div>
       <div class="navbar__section">
         <div class="page__controls">
           <div id="back" class="control_btn">
@@ -60,10 +62,10 @@
           </div>
         </div>
       </div>
-    </nav>   
+    </nav>
     <div class="etabs-views"></div>
     <script>
-      require('./app/renderer/components/barraHerramientas/barraHerramientas.js');
+      require('./app/renderer/components/barraHerramientas/index.js');
     </script>
   </body>
 </html>
