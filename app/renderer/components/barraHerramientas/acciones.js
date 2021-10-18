@@ -1,3 +1,9 @@
+const { formatearBusqueda } = require('../../../utils/formatearBusqueda');
+
+const motorBusqueda = {
+  url: 'https://www.google.com/search?q=',
+};
+
 const recargarPagina = (view) => {
   view.reload();
 };
@@ -26,7 +32,7 @@ const cargarPagina = (ev, navegador, view, tabgroup) => {
       let https = val.slice(0, 8).toLowerCase();
       let http = val.slice(0, 7).toLowerCase();
       if (!(https === 'https://' || http === 'http://')) {
-        val = 'http://' + val;
+        val = formatearBusqueda(val, motorBusqueda.url);
       }
 
       if (!tabgroup.getTabs().length) {
