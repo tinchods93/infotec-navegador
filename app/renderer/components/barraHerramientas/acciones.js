@@ -18,22 +18,38 @@ const avanzarPagina = (view) => {
   }
 };
 
-const cargarPagina = (ev, navegador, view) => {
-  if (ev.keyCode === 13) {
-    navegador.blur();
-    let val = navegador.value;
-    let https = val.slice(0, 8).toLowerCase();
-    let http = val.slice(0, 7).toLowerCase();
-    if (https === 'https://' || http === 'http://') {
-      view.loadURL(val);
-    } else {
-      view.loadURL('http://' + val);
+const cargarPagina = (ev, navegador, view, tabgroup) => {
+  try {
+    if (ev.keyCode === 13) {
+      navegador.blur();
+      let val = navegador.value;
+      let https = val.slice(0, 8).toLowerCase();
+      let http = val.slice(0, 7).toLowerCase();
+      if (!(https === 'https://' || http === 'http://')) {
+        val = 'http://' + val;
+      }
+
+      if (!tabgroup.getTabs().length) {
+        tabgroup.addTab({
+          title: 'Google3.0',
+          src: val,
+          active: true,
+          visible: false,
+        });
+      } else {
+        view.loadURL(val);
+      }
     }
+  } catch (error) {
+    console.log('ERROR CARGANDO URL', error);
   }
 };
 
-const actualizarURL = (ev, navegador, view) => {
-  navegador.value = view.src;
+const actualizarURL = (navegador, view) => {
+  navegador.value =
+    view.src.includes('https://') || view.src.includes('http://')
+      ? view.src
+      : '';
 };
 
 const listaFavoritos = (ev) => {

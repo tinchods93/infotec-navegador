@@ -20,6 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow: hidden;
   min-height: 100%;
   min-width: 300px;
   height: 100vh;
@@ -40,7 +41,12 @@ body {
   width: 100%;
   height: 100%;
 }
-
+.etabs-tabgroup {
+  max-width: 1723px;
+  width: 100%;
+  -webkit-app-region: drag;
+  display: flex !important;
+}
 .navbar {
   background: var(--color2);
   width: 100%;
@@ -64,10 +70,10 @@ body {
 .navbar__tabs {
   display: flex;
   flex-direction: row;
-  -webkit-app-region: drag;
-  width: 100%;
+  width: fit-content;
 }
-.navbar__tab {
+
+.etabs-tabs .active {
   display: flex;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -77,10 +83,23 @@ body {
   box-shadow: 10px 0 5px rgba(0, 0, 0, 0.05);
   align-items: center;
   padding: 10px;
-  width: 20%;
+  height: 100%;
+  overflow: hidden;
   -webkit-app-region: no-drag;
   user-select: none;
 }
+
+.etabs-tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  height: 100%;
+  -webkit-app-region: no-drag;
+  user-select: none;
+}
+
 .navbar__windowcontrols {
   display: flex;
   font-size: 1.2em;
@@ -113,17 +132,22 @@ body {
   flex-direction: row;
   align-items: center;
   width: 80%;
-  overflow: hidden;
 }
-.page__title span {
+.etabs-tab-title {
   color: var(--color7);
   margin-left: 5px;
+  max-width: 200px;
+  height: 100%;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
-.favicon {
+.etabs-tab-icon {
   width: 20px;
   height: 20px;
 }
-.favicon img {
+.etabs-tab-icon img {
   width: auto;
   height: 100%;
 }
@@ -187,4 +211,41 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.etabs-views {
+  background: brown;
+}
+
+.etabs-buttons {
+  /* background: chartreuse; */
+  display: flex;
+  -webkit-app-region: no-drag;
+  align-items: center;
+}
+.etabs-buttons .etabs-tab-button-new,
+.etabs-tab-button-close {
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.6em;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+  background: none;
+}
+
+.etabs-buttons .etabs-tab-button-new:hover {
+  background: rgba(169, 214, 229, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+}
+
+.etabs-tab-button-close:hover {
+  background: rgba(169, 214, 229, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
 }
