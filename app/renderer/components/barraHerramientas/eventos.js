@@ -24,13 +24,14 @@ const back = ById('back'),
 let view;
 
 //EVENTOS
-_TabGroup.on('tab-active', (tab) => {
-  evView(tab.webview, tab);
+_TabGroup.on('tab-active', (tab, tabGroup) => {
+  viewEvents(tab.webview, tab);
+  tabEvents(tab, tabGroup);
   view = tab.webview;
   actualizarURL(navegador, view);
 });
 
-const evView = (_view, activeTab) => {
+const viewEvents = (_view, aTab) => {
   _view.addEventListener('did-finish-load', (ev) => {
     actualizarURL(navegador, view);
   });
@@ -42,7 +43,7 @@ const evView = (_view, activeTab) => {
 
   _view.addEventListener('page-favicon-updated', (ev) => {
     const currentFavicon = ev.favicons;
-    activeTab.setIcon(currentFavicon[0]);
+    aTab.setIcon(currentFavicon[0]);
     // console.log('page-favicon-updated');
   });
 
@@ -60,8 +61,14 @@ const evView = (_view, activeTab) => {
     const title = _view.getTitle();
     console.log('TITULO', title);
     if (title !== 'undefined') {
-      activeTab.setTitle(title);
+      aTab.setTitle(title);
     }
+  });
+};
+
+const tabEvents = (aTab, tabGroup) => {
+  aTab.on('closing', (tab, abort) => {
+    if (tabGroup.getTabs().length <= 1) ipc.send('cerrarApp');
   });
 };
 
