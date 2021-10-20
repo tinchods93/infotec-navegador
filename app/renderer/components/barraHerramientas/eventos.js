@@ -1,11 +1,13 @@
 const { ipcRenderer: ipc } = require('electron');
 const { _TabGroup } = require('../Tabs/Tabs');
+const { actualizarViewFavoritos } = require('../favoritos/favoritos');
 const {
   actualizarURL,
   recargarPagina,
   avanzarPagina,
   retrocederPagina,
   cargarPagina,
+  actualizarBarraFavoritos,
 } = require('./acciones');
 
 const ById = (id) => {
@@ -13,15 +15,18 @@ const ById = (id) => {
 };
 
 //Traigo los elementos
-const back = ById('back'),
-  forward = ById('forward'),
-  refresh = ById('refresh'),
-  navegador = ById('url'),
-  fave = ById('fave'),
-  minimizarBtn = ById('minimizarBtn'),
-  restaurarBtn = ById('restaurarBtn'),
-  cerrarBtn = ById('cerrarBtn');
+const back = ById('back');
+const forward = ById('forward');
+const refresh = ById('refresh');
+const navegador = ById('url');
+const fave = ById('fave');
+const minimizarBtn = ById('minimizarBtn');
+const restaurarBtn = ById('restaurarBtn');
+const cerrarBtn = ById('cerrarBtn');
+const userOptions = ById('user_options');
 let view;
+const barraFavoritos = ById('barraFavoritos');
+const barraHerramientas = ById('navigation');
 
 //EVENTOS
 _TabGroup.on('tab-active', (tab, tabGroup) => {
@@ -29,35 +34,30 @@ _TabGroup.on('tab-active', (tab, tabGroup) => {
   tabEvents(tab, tabGroup);
   view = tab.webview;
   actualizarURL(navegador, view);
+  if (barraFavoritos) {
+    actualizarBarraFavoritos(barraFavoritos, barraHerramientas);
+    actualizarViewFavoritos(view, tabGroup);
+  }
 });
+
+if (barraFavoritos) {
+  actualizarBarraFavoritos(barraFavoritos, barraHerramientas);
+  actualizarViewFavoritos(view, _TabGroup);
+}
 
 const viewEvents = (_view, aTab) => {
   _view.addEventListener('did-finish-load', (ev) => {
     actualizarURL(navegador, view);
   });
 
-  _view.addEventListener('dom-ready', () => {
-    // view.openDevTools(); //Abre devtools de la pagina cargada
-    // console.log('dom-ready');
-  });
-
   _view.addEventListener('page-favicon-updated', (ev) => {
     const currentFavicon = ev.favicons;
     aTab.setIcon(currentFavicon[0]);
-    // console.log('page-favicon-updated');
   });
 
-  _view.addEventListener('did-start-loading', (ev) => {
-    // console.log('did-start-loading =>', ev);
-  });
-
-  _view.addEventListener('did-attach', (ev) => {
-    console.log('did-attach =>', ev);
-  });
+  _view.addEventListener('did-attach', (ev) => {});
 
   _view.addEventListener('did-stop-loading', (ev) => {
-    console.log('did-stop-loading =>', ev);
-
     const title = _view.getTitle();
     console.log('TITULO', title);
     if (title !== 'undefined') {
@@ -83,6 +83,11 @@ cerrarBtn.addEventListener('click', () => {
   ipc.send('cerrarApp');
 });
 
+ipc.on('favorito_agregado_', () => {
+  actualizarBarraFavoritos(barraFavoritos, barraHerramientas);
+  // actualizarViewFavoritos(view, tabGroup);
+});
+
 navegador.addEventListener('keydown', (ev) => {
   cargarPagina(ev, navegador, view, _TabGroup);
 });
@@ -96,4 +101,7 @@ forward.addEventListener('click', () => {
   avanzarPagina(view);
 });
 
+userOptions.addEventListener('click', () => {
+  ipc.send('user_options');
+});
 // fave.addEventListener('click', agregarFavorito);*/
