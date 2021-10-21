@@ -1,19 +1,14 @@
 const { formatearBusqueda } = require('../../utils/formatearBusqueda');
-const config = {
-  viewAux: undefined,
-  tabGroupAux: undefined,
-};
+
 const motorBusqueda = {
   url: 'https://www.google.com/search?q=',
 };
 
 const recargarPagina = (view) => {
-  config.viewAux = view;
   view.reload();
 };
 
 const retrocederPagina = (view) => {
-  config.viewAux = view;
   try {
     view.goBack();
   } catch (error) {
@@ -22,7 +17,6 @@ const retrocederPagina = (view) => {
 };
 
 const avanzarPagina = (view) => {
-  config.viewAux = view;
   try {
     view.goForward();
   } catch (error) {
@@ -31,8 +25,6 @@ const avanzarPagina = (view) => {
 };
 
 const cargarPagina = (ev, navegador, view, tabgroup) => {
-  config.viewAux = view;
-  config.tabGroupAux = tabgroup;
   try {
     if (ev.keyCode === 13) {
       navegador.blur();
@@ -84,15 +76,12 @@ const cargarFavorito = (tabGroup, url) => {
 };
 
 const actualizarURL = (navegador, view) => {
-  config.viewAux = view;
   navegador.value =
     view.src.includes('https://') || view.src.includes('http://')
       ? view.src
       : '';
 };
 
-// if (ipcRenderer) {
-// }
 
 module.exports = {
   recargarPagina,

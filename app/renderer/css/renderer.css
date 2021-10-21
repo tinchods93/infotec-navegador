@@ -252,7 +252,13 @@ body {
 .background_img img {
   width: 100%;
   height: auto;
+  
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
 }
+
 
 .etabs-buttons {
   /* background: chartreuse; */
