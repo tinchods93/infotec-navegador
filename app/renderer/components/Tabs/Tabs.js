@@ -5,6 +5,7 @@ const _TabGroup = new TabGroup({
     title: 'Nueva Pestaña',
     visible: true,
     active: true,
+    iconURL: 'https://images2.imgbox.com/53/fd/I4pHpKpX_o.png',
     webviewAttributes: {
       nodeintegration: true,
     },
