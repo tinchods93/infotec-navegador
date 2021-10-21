@@ -1,5 +1,4 @@
 const { app, BrowserWindow, ipcMain: ipc, ipcRenderer } = require('electron');
-const { ContextMenu } = require('./app/renderer/components/Menus/ContextMenu');
 const path = require('path');
 const url = require('url');
 
@@ -43,14 +42,6 @@ function createWindow() {
 
   ipc.on('restaurarApp', () => {
     mainWindow.isMaximized() ? mainWindow.restore() : mainWindow.maximize();
-  });
-
-  ipc.on('user_options', (event) => {
-    ContextMenu(event.sender);
-  });
-
-  ipc.on('favorito_agregado', (ev) => {
-    ev.sender.send('favorito_agregado_');
   });
 
   // Emitted when the window is closed.

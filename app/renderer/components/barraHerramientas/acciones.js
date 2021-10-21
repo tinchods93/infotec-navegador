@@ -52,7 +52,7 @@ const cargarPagina = (ev, navegador, view, tabgroup) => {
 
       if (!tabgroup.getTabs().length) {
         tabgroup.addTab({
-          title: 'Google3.0',
+          title: 'cargando...',
           src: val,
           active: true,
           visible: false,
@@ -66,45 +66,22 @@ const cargarPagina = (ev, navegador, view, tabgroup) => {
   }
 };
 
-const cargarFavorito = (view, tabGroup, favorito) => {
+const cargarFavorito = (tabGroup, url) => {
   // console.log('TABGROUP==>', tabGroup);
-  // const aTab = tabGroup.getActiveTab();
+  const aTab = tabGroup.getActiveTab();
   try {
-    if (!tabGroup.getTabs().length) {
+    if (!tabGroup.getTabs().length || !aTab) {
       tabGroup.addTab({
-        title: favorito.titulo,
-        src: favorito.url,
+        title: 'cargando',
+        src: url,
         active: true,
         visible: false,
       });
     } else {
-      view.loadURL(favorito.url);
+      aTab.webview.loadURL(url);
     }
   } catch (error) {
     console.log('ERROR CARGANDO URL', error);
-  }
-};
-
-const actualizarBarraFavoritos = (barraFavoritos, barraHerramientas, view) => {
-  const lista = JSON.parse(localStorage.getItem('favoritos'));
-
-  if (lista && lista.length) {
-    barraFavoritos.style.display = 'flex';
-    barraFavoritos.innerHTML = lista
-      .map((favorito, index) => {
-        return `<div class="favorito__container " id="fav_${index}">
-          <div class="etabs-tab-icon">
-            <img src="${favorito.favicon}" alt="">
-          </div>
-          <div class="etabs-tab-title">
-            <span>${favorito.titulo}</span>
-          </div>
-        </div>`;
-      })
-      .join('');
-  } else {
-    barraFavoritos.style.display = 'none';
-    barraFavoritos.innerHTML = '';
   }
 };
 
@@ -124,7 +101,6 @@ module.exports = {
   retrocederPagina,
   avanzarPagina,
   cargarPagina,
-  cargarFavorito,
   actualizarURL,
-  actualizarBarraFavoritos,
+  cargarFavorito,
 };

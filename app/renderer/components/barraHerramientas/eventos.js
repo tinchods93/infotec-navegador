@@ -1,13 +1,11 @@
 const { ipcRenderer: ipc } = require('electron');
 const { _TabGroup } = require('../Tabs/Tabs');
-const { actualizarViewFavoritos } = require('../favoritos/favoritos');
 const {
   actualizarURL,
   recargarPagina,
   avanzarPagina,
   retrocederPagina,
   cargarPagina,
-  actualizarBarraFavoritos,
 } = require('./acciones');
 
 const ById = (id) => {
@@ -25,7 +23,6 @@ const restaurarBtn = ById('restaurarBtn');
 const cerrarBtn = ById('cerrarBtn');
 const userOptions = ById('user_options');
 let view;
-const barraFavoritos = ById('barraFavoritos');
 const barraHerramientas = ById('navigation');
 
 //EVENTOS
@@ -34,16 +31,7 @@ _TabGroup.on('tab-active', (tab, tabGroup) => {
   tabEvents(tab, tabGroup);
   view = tab.webview;
   actualizarURL(navegador, view);
-  if (barraFavoritos) {
-    actualizarBarraFavoritos(barraFavoritos, barraHerramientas);
-    actualizarViewFavoritos(view, tabGroup);
-  }
 });
-
-if (barraFavoritos) {
-  actualizarBarraFavoritos(barraFavoritos, barraHerramientas);
-  actualizarViewFavoritos(view, _TabGroup);
-}
 
 const viewEvents = (_view, aTab) => {
   _view.addEventListener('did-finish-load', (ev) => {
@@ -55,11 +43,17 @@ const viewEvents = (_view, aTab) => {
     aTab.setIcon(currentFavicon[0]);
   });
 
-  _view.addEventListener('did-attach', (ev) => {});
+  _view.addEventListener('did-start-loading', (ev) => {
+    if (aTab) {
+      aTab.setTitle('cargando...');
+    }
+  });
 
   _view.addEventListener('did-stop-loading', (ev) => {
     const title = _view.getTitle();
+    console.log('stop-loading');
     console.log('TITULO', title);
+    actualizarURL(navegador, view);
     if (title !== 'undefined') {
       aTab.setTitle(title);
     }
@@ -81,11 +75,6 @@ restaurarBtn.addEventListener('click', () => {
 });
 cerrarBtn.addEventListener('click', () => {
   ipc.send('cerrarApp');
-});
-
-ipc.on('favorito_agregado_', () => {
-  actualizarBarraFavoritos(barraFavoritos, barraHerramientas);
-  // actualizarViewFavoritos(view, tabGroup);
 });
 
 navegador.addEventListener('keydown', (ev) => {

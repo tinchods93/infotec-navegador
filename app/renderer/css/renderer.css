@@ -52,7 +52,7 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 120px;
+  height: 100px;
   max-height: fit-content;
   border-bottom: 1px solid var(--color5b);
 }
@@ -70,12 +70,13 @@ body {
   padding-right: 5px;
   background: var(--color4);
 }
-#barraFavoritos {
-  height: fit-content;  
-  background: var(--color4);
-  max-height: fit-content;
-  padding-top: 8px;
-  padding-bottom: 8px;
+.barraFavoritos {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background: var(--color4);  
+  padding-top: 5px;
+  padding-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
 }
