@@ -1,10 +1,15 @@
-const { app, BrowserWindow, ipcMain: ipc } = require('electron');
+const {
+  app,
+  BrowserWindow,
+  ipcMain: ipc,
+  globalShortcut,
+} = require('electron');
 
 //Dejamos una referencia global a mainWindow
 let mainWindow;
 
 const createWindow = () => {
-  // Create the browser window.
+  //Instancia principal
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -24,6 +29,21 @@ const createWindow = () => {
   //Abrimos la consola de chromium
   mainWindow.webContents.openDevTools();
   mainWindow.maximize();
+
+  //Shortcuts
+  globalShortcut.register('CommandOrControl+T', () => {
+    mainWindow.webContents.send('add_tab');
+  });
+
+  globalShortcut.register('CommandOrControl+W', () => {
+    mainWindow.webContents.send('close_active_tab');
+  });
+
+  globalShortcut.register('CommandOrControl+TAB', () => {
+    mainWindow.webContents.send('change_active_tab');
+  });
+
+  // Check whether a shortcut is registered.
 
   //EVENTOS PARA EL CONTROL DE LA VENTANA
   ipc.on('cerrarApp', () => {

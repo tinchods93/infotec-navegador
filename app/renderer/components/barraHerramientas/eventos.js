@@ -12,19 +12,15 @@ const ById = (id) => {
   return document.getElementById(id);
 };
 
-//Traemos elementos del DOM
 const back = ById('back');
 const forward = ById('forward');
 const refresh = ById('refresh');
 const navegador = ById('url');
-const fave = ById('fave');
 const minimizarBtn = ById('minimizarBtn');
 const restaurarBtn = ById('restaurarBtn');
 const cerrarBtn = ById('cerrarBtn');
 const userOptions = ById('user_options');
 let view;
-
-// document.onkeydown = combTeclas.KeyPress;
 
 //EVENTOS
 _TabGroup.on('tab-active', (tab, tabGroup) => {
@@ -38,6 +34,7 @@ _TabGroup.on('tab-added', (tab, tabGroup) => {
   tab.webview.style.background = 'none';
 });
 
+//ESTA FUNCION GENERA LOS EVENTOS PARA CADA VIEW GENERADO POR UNA PESTAÑA/TAB
 const viewEvents = (_view, aTab) => {
   _view.addEventListener('page-favicon-updated', (ev) => {
     const currentFavicon = ev.favicons;
@@ -80,10 +77,11 @@ const tabEvents = (aTab, tabGroup) => {
   });
 };
 
+
+//EVENTOS CONTROL DE LA VENTANA
 minimizarBtn.addEventListener('click', () => {
   ipc.send('minimizarApp');
 });
-
 restaurarBtn.addEventListener('click', () => {
   ipc.send('restaurarApp');
 });
@@ -91,6 +89,8 @@ cerrarBtn.addEventListener('click', () => {
   ipc.send('cerrarApp');
 });
 
+
+//EVENTOS CONTROL DE LA PAGINA
 navegador.addEventListener('keydown', (ev) => {
   cargarPagina(ev, navegador, view, _TabGroup);
 });
@@ -104,7 +104,36 @@ forward.addEventListener('click', () => {
   avanzarPagina(view);
 });
 
+
 userOptions.addEventListener('click', () => {
   ipc.send('user_options');
 });
-// fave.addEventListener('click', agregarFavorito);*/
+
+ipc.on('add_tab', () => {
+  _TabGroup.addTab();
+});
+
+ipc.on('close_active_tab', () => {
+  const aTab = _TabGroup.getActiveTab();
+  if (aTab) {
+    aTab.close();
+  }
+});
+
+ipc.on('change_active_tab', () => {
+  const aTab = _TabGroup.getActiveTab();
+  if (aTab) {
+    //getPosition, devuelve la posicion de la TAB en orden 1....n
+    let aIndex = aTab.getPosition();
+    const allTabs = _TabGroup.getTabs();
+    if (aIndex === allTabs.length) {
+      aIndex = 1;
+    } else {
+      aIndex++;
+    }
+
+    //Obtenemso una tab por posicion y la volvemos activa
+    _TabGroup.getTabByPosition(aIndex).activate(true);
+  }
+});
+
