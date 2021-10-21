@@ -12,7 +12,7 @@ const ById = (id) => {
   return document.getElementById(id);
 };
 
-//Traigo los elementos
+//Traemos elementos del DOM
 const back = ById('back');
 const forward = ById('forward');
 const refresh = ById('refresh');
@@ -23,7 +23,8 @@ const restaurarBtn = ById('restaurarBtn');
 const cerrarBtn = ById('cerrarBtn');
 const userOptions = ById('user_options');
 let view;
-const barraHerramientas = ById('navigation');
+
+// document.onkeydown = combTeclas.KeyPress;
 
 //EVENTOS
 _TabGroup.on('tab-active', (tab, tabGroup) => {
