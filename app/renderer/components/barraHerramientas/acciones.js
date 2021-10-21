@@ -36,7 +36,6 @@ const cargarPagina = (ev, navegador, view, tabgroup) => {
         const urlList = val.split('.');
         if (urlList.includes('www') && urlList.includes('com')) {
           val = `http://${val}`;
-          // return;
         } else val = formatearBusqueda(val, motorBusqueda.url);
       }
 
@@ -81,7 +80,6 @@ const actualizarURL = (navegador, view) => {
       ? view.src
       : '';
 };
-
 
 module.exports = {
   recargarPagina,

@@ -46,12 +46,7 @@ body {
   width: 100%;
   height: 100%;
 }
-.etabs-tabgroup {
-  max-width: 1723px;
-  width: 100%;
-  -webkit-app-region: drag;
-  display: flex !important;
-}
+
 .navbar {
   background: var(--color2);
   width: 100%;
@@ -90,10 +85,12 @@ body {
   user-select: none;
 }
 
-.navbar__tabs {
+.etabs-tabs {
   display: flex;
   flex-direction: row;
+  max-width: 100;
   width: fit-content;
+  overflow-x: hidden;
 }
 
 .etabs-tabs .active {
@@ -112,15 +109,11 @@ body {
   user-select: none;
 }
 
-.etabs-tab {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-  height: 100%;
-  -webkit-app-region: no-drag;
-  user-select: none;
+.etabs-tabgroup {
+  max-width: 1723px;
+  width: 100%;
+  -webkit-app-region: drag;
+  display: flex !important;
 }
 
 .navbar__windowcontrols {
@@ -128,8 +121,24 @@ body {
   font-size: 1.2em;
   justify-content: space-around;
   align-items: center;
-  width: 150px;
+  width: 120px;
+  min-width: 120px;
 }
+
+.etabs-tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  height: 100%;
+  width: 50%;
+  min-width: 100px;
+    -webkit-app-region: no-drag;
+  user-select: none;
+}
+
+
 .control__icon {
   display: flex;
   align-items: center;
@@ -314,4 +323,20 @@ body {
 #CustomMenu {
   text-decoration: none;
   color: var(--color7);
+}
+
+/* @media screen and (max-width:764px){
+  
+  .etabs-tabgroup {
+    width: 80%;
+  }
+  
+} */
+
+@media screen and (max-width:764px){
+  
+  .etabs-tabgroup {
+    width: 70%;
+  }
+  
 }

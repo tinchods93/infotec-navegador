@@ -12,7 +12,6 @@ const ById = (id) => {
   return document.getElementById(id);
 };
 
-//TRAEMOS LOS ELEMENTOS
 const back = ById('back');
 const forward = ById('forward');
 const refresh = ById('refresh');
