@@ -10,28 +10,14 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./app/renderer/css/renderer.css" />
+    <script src="./app/renderer/components/ctxmenu.min/ctxmenu.min.js"></script>
   </head>
   <body id="browser">
-    <nav id="navigation" class="navbar">
+    <nav id="navigation" class="navbar"  >
       <div class="navbar__section">
-        <div class="navbar__tabs">
-          <div class="navbar__tab">
-            <div class="page__title">
-              <div class="favicon">
-                <img
-                  src="https://www.google.com/favicon.ico"
-                  alt="favicon"
-                  id="favicon"
-                />
-              </div>
-              <span
-                >Googleaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span
-              >
-            </div>
-            <div class="control_btn">
-              <i class="fas fa-times"></i>
-            </div>
-          </div>
+        <div class="etabs-tabgroup">
+          <div class="navbar__tabs etabs-tabs"></div>
+          <div class="etabs-buttons"></div>
         </div>
         <div class="navbar__windowcontrols">
           <div class="control__icon" id="minimizarBtn">
@@ -61,30 +47,26 @@
           <div class="page__url" id="omnibox">
             <input type="text" id="url" />
             <div class="favoritos" id="fave">
-              <div class="control_btn">
+              <div class="control_btn" id="new-link-button">
                 <i class="far fa-star" aria-hidden="true"></i>
               </div>
             </div>
           </div>
         </div>
-        <div class="user__options__burger">
-          <div class="control_btn">
+        <div class="user__options__burger" >
+          <div class="control_btn" id="user_options">
             <i class="fas fa-ellipsis-v"></i>
           </div>
         </div>
       </div>
+      <section class="barraFavoritos" id="links"></section>
     </nav>
-    <div id="views" class="views">
-      <webview
-        id="view"
-        class="page"
-        src="http://www.google.com/"
-        autosize="on"
-        nodeintegration
-      ></webview>
+    <div class="etabs-views"></div>
+    <div class="background_img">
+      <img src="./app/renderer/resources/body_navegador.jpg" alt="">
     </div>
     <script>
-      require('./app/renderer/components/barraHerramientas/barraHerramientas.js');
+      require('./app/renderer/components/barraHerramientas/index.js');
     </script>
   </body>
 </html>

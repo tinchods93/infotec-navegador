@@ -1,8 +1,13 @@
+/* 
+611111
+89121b
+c01f28
+ */
 :root {
-  --color1: #012a4a;
-  --color2: #013a63;
-  --color3: #01497c;
-  --color4: #2c7da0;
+  --color1: #1a1a1a;
+  --color2: #434343;
+  --color3: #611111;
+  --color4: #8b2929;
   --color5: #468faf;
   --color5b: #71adc6;
   --color6: #a9d6e5;
@@ -20,6 +25,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow: hidden;
   min-height: 100%;
   min-width: 300px;
   height: 100vh;
@@ -31,7 +37,7 @@ body {
 #views {
   width: 100%;
   height: 100%;
-  background: var(--color1);
+  /* background: var(--color1); */
   flex: 1;
 }
 
@@ -40,34 +46,57 @@ body {
   width: 100%;
   height: 100%;
 }
-
+.etabs-tabgroup {
+  max-width: 1723px;
+  width: 100%;
+  -webkit-app-region: drag;
+  display: flex !important;
+}
 .navbar {
   background: var(--color2);
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 80px;
+  height: 100px;
+  max-height: fit-content;
   border-bottom: 1px solid var(--color5b);
 }
 .navbar .navbar__section {
   display: flex;
   flex-direction: row;
-  height: 50%;
   width: 100%;
 }
 
+.navbar .navbar__section:nth-child(1) {
+  height: 40px;
+}
 .navbar .navbar__section:nth-child(2) {
+  height: 40px;
   padding-top: 5px;
   padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
   background: var(--color4);
 }
+.barraFavoritos {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background: var(--color4);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  user-select: none;
+}
+
 .navbar__tabs {
   display: flex;
   flex-direction: row;
-  -webkit-app-region: drag;
-  width: 100%;
+  width: fit-content;
 }
-.navbar__tab {
+
+.etabs-tabs .active {
   display: flex;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -77,10 +106,23 @@ body {
   box-shadow: 10px 0 5px rgba(0, 0, 0, 0.05);
   align-items: center;
   padding: 10px;
-  width: 20%;
+  height: 100%;
+  overflow: hidden;
   -webkit-app-region: no-drag;
   user-select: none;
 }
+
+.etabs-tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  height: 100%;
+  -webkit-app-region: no-drag;
+  user-select: none;
+}
+
 .navbar__windowcontrols {
   display: flex;
   font-size: 1.2em;
@@ -113,17 +155,24 @@ body {
   flex-direction: row;
   align-items: center;
   width: 80%;
-  overflow: hidden;
 }
-.page__title span {
+.etabs-tab-title {
   color: var(--color7);
   margin-left: 5px;
+  max-width: 200px;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* background: chocolate; */
+  text-overflow: ellipsis;
 }
-.favicon {
+.etabs-tab-icon {
   width: 20px;
   height: 20px;
 }
-.favicon img {
+.etabs-tab-icon img {
   width: auto;
   height: 100%;
 }
@@ -187,4 +236,76 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.etabs-views {
+  width: 100%;
+  height: 100%;
+}
+.etabs-views .etabs-view {
+  background: white;
+}
+.background_img {
+  width: 100%;
+  height: 100%;
+}
+.background_img img {
+  width: 100%;
+  height: auto;
+}
+
+.etabs-buttons {
+  /* background: chartreuse; */
+  display: flex;
+  -webkit-app-region: no-drag;
+  align-items: center;
+}
+.etabs-buttons .etabs-tab-button-new,
+.etabs-tab-button-close {
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.6em;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+  background: none;
+}
+
+.etabs-buttons .etabs-tab-button-new:hover {
+  background: rgba(169, 214, 229, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+}
+
+.etabs-tab-button-close:hover {
+  background: rgba(169, 214, 229, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+}
+
+.favorito__container {
+  color: rgba(255, 255, 255, 0.7);
+  width: fit-content;
+  max-width: 120px;
+  margin-right: 5px;
+  padding: 5px 10px 5px 10px;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  /* overflow: hidden; */
+  border-radius: 15px;
+  /* height: 25px; */
+}
+.favorito__container:hover {
+  background: rgba(169, 214, 229, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+}
+#CustomMenu {
+  text-decoration: none;
+  color: var(--color7);
 }

@@ -1,5 +1,4 @@
-const { app, BrowserWindow, ipcMain: ipc } = require('electron');
-
+const { app, BrowserWindow, ipcMain: ipc, ipcRenderer } = require('electron');
 const path = require('path');
 const url = require('url');
 
@@ -12,6 +11,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth: 400,
+    minHeight: 200,
     frame: false,
     webPreferences: {
       nodeIntegration: true,
@@ -31,6 +32,7 @@ function createWindow() {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+  mainWindow.maximize();
 
   //EVENTOS PARA EL CONTROL DE LA VENTANA
   ipc.on('cerrarApp', () => {
