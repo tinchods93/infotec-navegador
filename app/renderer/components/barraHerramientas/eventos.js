@@ -33,11 +33,11 @@ _TabGroup.on('tab-active', (tab, tabGroup) => {
   actualizarURL(navegador, view);
 });
 
-const viewEvents = (_view, aTab) => {
-  _view.addEventListener('did-finish-load', (ev) => {
-    actualizarURL(navegador, view);
-  });
+_TabGroup.on('tab-added', (tab, tabGroup) => {
+  tab.webview.style.background = 'none';
+});
 
+const viewEvents = (_view, aTab) => {
   _view.addEventListener('page-favicon-updated', (ev) => {
     const currentFavicon = ev.favicons;
     aTab.setIcon(currentFavicon[0]);
@@ -49,13 +49,26 @@ const viewEvents = (_view, aTab) => {
     }
   });
 
-  _view.addEventListener('did-stop-loading', (ev) => {
+  _view.addEventListener('did-finish-load', (ev) => {
     const title = _view.getTitle();
-    console.log('stop-loading');
-    console.log('TITULO', title);
     actualizarURL(navegador, view);
     if (title !== 'undefined') {
+      _view.style.background = 'white';
       aTab.setTitle(title);
+    }
+  });
+
+  _view.addEventListener('did-stop-loading', (ev) => {
+    const title = _view.getTitle();
+    actualizarURL(navegador, view);
+
+    _view.style.background = 'white';
+
+    if (title !== 'undefined') {
+      aTab.setTitle(title);
+    } else {
+      _view.style.background = 'none';
+      aTab.setTitle('Nueva Pestaña');
     }
   });
 };

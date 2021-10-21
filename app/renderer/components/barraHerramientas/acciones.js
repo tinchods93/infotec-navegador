@@ -1,5 +1,4 @@
-const { formatearBusqueda } = require('../../../utils/formatearBusqueda');
-
+const { formatearBusqueda } = require('../../utils/formatearBusqueda');
 const config = {
   viewAux: undefined,
   tabGroupAux: undefined,
@@ -42,7 +41,6 @@ const cargarPagina = (ev, navegador, view, tabgroup) => {
       let http = val.slice(0, 7).toLowerCase();
 
       if (!(https === 'https://' || http === 'http://')) {
-        console.log(val);
         const urlList = val.split('.');
         if (urlList.includes('www') && urlList.includes('com')) {
           val = `http://${val}`;
@@ -52,9 +50,9 @@ const cargarPagina = (ev, navegador, view, tabgroup) => {
 
       if (!tabgroup.getTabs().length) {
         tabgroup.addTab({
-          title: 'cargando...',
           src: val,
           active: true,
+          iconURL: 'https://images2.imgbox.com/53/fd/I4pHpKpX_o.png',
           visible: false,
         });
       } else {
@@ -67,7 +65,6 @@ const cargarPagina = (ev, navegador, view, tabgroup) => {
 };
 
 const cargarFavorito = (tabGroup, url) => {
-  // console.log('TABGROUP==>', tabGroup);
   const aTab = tabGroup.getActiveTab();
   try {
     if (!tabGroup.getTabs().length || !aTab) {
@@ -75,6 +72,7 @@ const cargarFavorito = (tabGroup, url) => {
         title: 'cargando',
         src: url,
         active: true,
+        iconURL: 'https://images2.imgbox.com/53/fd/I4pHpKpX_o.png',
         visible: false,
       });
     } else {

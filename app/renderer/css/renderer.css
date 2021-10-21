@@ -1,8 +1,13 @@
+/* 
+611111
+89121b
+c01f28
+ */
 :root {
-  --color1: #012a4a;
-  --color2: #013a63;
-  --color3: #01497c;
-  --color4: #2c7da0;
+  --color1: #1a1a1a;
+  --color2: #434343;
+  --color3: #611111;
+  --color4: #8b2929;
   --color5: #468faf;
   --color5b: #71adc6;
   --color6: #a9d6e5;
@@ -32,7 +37,7 @@ body {
 #views {
   width: 100%;
   height: 100%;
-  background: var(--color1);
+  /* background: var(--color1); */
   flex: 1;
 }
 
@@ -59,11 +64,14 @@ body {
 .navbar .navbar__section {
   display: flex;
   flex-direction: row;
-  height: 50%;
   width: 100%;
 }
 
+.navbar .navbar__section:nth-child(1) {
+  height: 40px;
+}
 .navbar .navbar__section:nth-child(2) {
+  height: 40px;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -74,11 +82,12 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  background: var(--color4);  
+  background: var(--color4);
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
+  user-select: none;
 }
 
 .navbar__tabs {
@@ -158,7 +167,6 @@ body {
   align-items: center;
   /* background: chocolate; */
   text-overflow: ellipsis;
-
 }
 .etabs-tab-icon {
   width: 20px;
@@ -231,7 +239,19 @@ body {
 }
 
 .etabs-views {
-  background: brown;
+  width: 100%;
+  height: 100%;
+}
+.etabs-views .etabs-view {
+  background: white;
+}
+.background_img {
+  width: 100%;
+  height: 100%;
+}
+.background_img img {
+  width: 100%;
+  height: auto;
 }
 
 .etabs-buttons {
@@ -268,11 +288,11 @@ body {
 }
 
 .favorito__container {
-  color: rgba(255, 255, 255, 0.7);  
+  color: rgba(255, 255, 255, 0.7);
   width: fit-content;
   max-width: 120px;
   margin-right: 5px;
-  padding: 5px 10px 5px 10px;  
+  padding: 5px 10px 5px 10px;
   display: flex;
   white-space: nowrap;
   align-items: center;
@@ -284,4 +304,8 @@ body {
   background: rgba(169, 214, 229, 0.3);
   color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
+}
+#CustomMenu {
+  text-decoration: none;
+  color: var(--color7);
 }
