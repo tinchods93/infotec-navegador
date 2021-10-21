@@ -10,13 +10,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./app/renderer/css/renderer.css" />
-    <!-- <link
-      rel="stylesheet"
-      href="node_modules/electron-tabs/electron-tabs.css"
-    /> -->
+    <script src="./app/renderer/components/ctxmenu.min/ctxmenu.min.js"></script>
   </head>
   <body id="browser">
-    <nav id="navigation" class="navbar">
+    <nav id="navigation" class="navbar"  >
       <div class="navbar__section">
         <div class="etabs-tabgroup">
           <div class="navbar__tabs etabs-tabs"></div>
@@ -50,18 +47,19 @@
           <div class="page__url" id="omnibox">
             <input type="text" id="url" />
             <div class="favoritos" id="fave">
-              <div class="control_btn">
+              <div class="control_btn" id="new-link-button">
                 <i class="far fa-star" aria-hidden="true"></i>
               </div>
             </div>
           </div>
         </div>
-        <div class="user__options__burger">
-          <div class="control_btn">
+        <div class="user__options__burger" >
+          <div class="control_btn" id="user_options">
             <i class="fas fa-ellipsis-v"></i>
           </div>
         </div>
       </div>
+      <section class="barraFavoritos" id="links"></section>
     </nav>
     <div class="etabs-views"></div>
     <script>

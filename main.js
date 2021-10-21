@@ -1,5 +1,4 @@
-const { app, BrowserWindow, ipcMain: ipc } = require('electron');
-
+const { app, BrowserWindow, ipcMain: ipc, ipcRenderer } = require('electron');
 const path = require('path');
 const url = require('url');
 

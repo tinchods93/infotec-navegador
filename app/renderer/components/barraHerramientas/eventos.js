@@ -13,15 +13,17 @@ const ById = (id) => {
 };
 
 //Traigo los elementos
-const back = ById('back'),
-  forward = ById('forward'),
-  refresh = ById('refresh'),
-  navegador = ById('url'),
-  fave = ById('fave'),
-  minimizarBtn = ById('minimizarBtn'),
-  restaurarBtn = ById('restaurarBtn'),
-  cerrarBtn = ById('cerrarBtn');
+const back = ById('back');
+const forward = ById('forward');
+const refresh = ById('refresh');
+const navegador = ById('url');
+const fave = ById('fave');
+const minimizarBtn = ById('minimizarBtn');
+const restaurarBtn = ById('restaurarBtn');
+const cerrarBtn = ById('cerrarBtn');
+const userOptions = ById('user_options');
 let view;
+const barraHerramientas = ById('navigation');
 
 //EVENTOS
 _TabGroup.on('tab-active', (tab, tabGroup) => {
@@ -36,30 +38,22 @@ const viewEvents = (_view, aTab) => {
     actualizarURL(navegador, view);
   });
 
-  _view.addEventListener('dom-ready', () => {
-    // view.openDevTools(); //Abre devtools de la pagina cargada
-    // console.log('dom-ready');
-  });
-
   _view.addEventListener('page-favicon-updated', (ev) => {
     const currentFavicon = ev.favicons;
     aTab.setIcon(currentFavicon[0]);
-    // console.log('page-favicon-updated');
   });
 
   _view.addEventListener('did-start-loading', (ev) => {
-    // console.log('did-start-loading =>', ev);
-  });
-
-  _view.addEventListener('did-attach', (ev) => {
-    console.log('did-attach =>', ev);
+    if (aTab) {
+      aTab.setTitle('cargando...');
+    }
   });
 
   _view.addEventListener('did-stop-loading', (ev) => {
-    console.log('did-stop-loading =>', ev);
-
     const title = _view.getTitle();
+    console.log('stop-loading');
     console.log('TITULO', title);
+    actualizarURL(navegador, view);
     if (title !== 'undefined') {
       aTab.setTitle(title);
     }
@@ -96,4 +90,7 @@ forward.addEventListener('click', () => {
   avanzarPagina(view);
 });
 
+userOptions.addEventListener('click', () => {
+  ipc.send('user_options');
+});
 // fave.addEventListener('click', agregarFavorito);*/
